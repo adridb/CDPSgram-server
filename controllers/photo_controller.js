@@ -1,10 +1,26 @@
 var fs = require('fs');
-var photo_model = require('./../models/photo');
-
+//var photo_model = require('./../models/photo');
+var models = require('../models');
 // Devuelve una lista de las imagenes disponibles y sus metadatos
-exports.list = function (req, res) {
-	var photos = photo_model.photos;
-	res.render('photos/index', {photos: photos});
+exports.list = function (req, res,next) {
+models.Photos.findOne() // Busca la primera pregunta existente
+		.then(function(photos) {
+			if (photos) {
+				
+
+				res.render('photos/index', {name: photos.name,
+								                url: photos.url});
+		    } else {
+		    	throw new Error('No hay preguntas en la BBDD.');
+		    }
+		})
+		.catch(function(error) {
+			next(error);
+});
+
+
+	//var photos = photo_model.photos;
+	//res.render('photos/index', {photos: photos});
 };
 
 // Devuelve la vista del formulario para subir una nueva foto

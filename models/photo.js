@@ -7,7 +7,7 @@ photo_id: {
 	url: url del fichero de audio
 } 
 
-*/
+
 
 var photos_url = process.env.PHOTOS_URL || "http://localhost:8000"
 
@@ -32,4 +32,13 @@ exports.photos = {
 		name: 'People',
 		url: photos_url + '/photos/photo5.jpg'
 	}
+};
+*/
+// Definición modelo de foto con sequelize
+var photos_url = process.env.PHOTOS_URL || "http://localhost:8000"
+module.exports = function(sequelize, DataTypes){
+	return sequelize.define('Photos',
+							{ name: DataTypes.STRING,
+							  url: DataTypes.STRING
+							});
 };
