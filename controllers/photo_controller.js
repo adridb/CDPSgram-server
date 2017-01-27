@@ -82,7 +82,7 @@ exports.destroy = function (req, res,next) {
 	req.photo.destroy()
 	.then(function(){
 		console.log("The photo has been deleted");
-		req.redirect('/photos');
+		res.redirect('/photos');
 	})
 	.catch(function(error){
 		console.log("Error deleting the photo");
