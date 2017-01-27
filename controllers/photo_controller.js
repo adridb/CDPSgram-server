@@ -11,8 +11,6 @@ models.Photos.findAll() // Busca la primera pregunta existente
 
 			})
 		.catch(function(error) { next(error); });
-
- }
 	//var photos = photo_model.photos;
 	//res.render('photos/index', {photos: photos});
 };
@@ -33,7 +31,7 @@ exports.show = function (req, res,next) {
 		    
 		})
 		.catch(function(error) { next(error); });
-	}
+	
 };
 
 // Escribe una nueva foto en el registro de imagenes.
