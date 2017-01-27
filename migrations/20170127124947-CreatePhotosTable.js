@@ -10,9 +10,9 @@ module.exports = {
                           primaryKey: true,         autoIncrement: true,  
                           unique: true },
              name:  { type: Sequelize.STRING},
-             url:    { type: Sequelize.STRING }
-             
-             
+             url:    { type: Sequelize.STRING },
+              createdAt: { type: Sequelize.DATE,     allowNull: false },
+             updatedAt: { type: Sequelize.DATE,     allowNull: false }
            },
            { sync: {force: true}
            }
