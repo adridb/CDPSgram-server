@@ -26,7 +26,7 @@ exports.show = function (req, res,next) {
 	models.Photos.findById(req.params.photoId) // Busca la primera pregunta existente
 		.then(function(photo) {
 			if (photo) {
-				res.render('photos/index', {photo: photo}); 
+				res.render('photos/show', {photo: photo}); 
 			}
 		    
 		})
