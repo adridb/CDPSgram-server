@@ -42,7 +42,7 @@ exports.create = function (req, res,next) {
 	//var photo = req.files.photo;
 	var id = Math.random().toString(36).substr(2, 10);
 	console.log('Nuevo fichero: ', req.body);
-	cosole.log("Id"+ id);
+	console.log("Id"+ id);
 	//var name = req.body.name;
 	//var url = req.body.url;
 	
