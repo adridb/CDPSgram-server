@@ -17,7 +17,7 @@ models.Photos.findAll() // Busca la primera pregunta existente
 
 // Devuelve la vista del formulario para subir una nueva foto
 exports.new = function (req, res,next) {
-	var photo = models.Photos.buid({name:"",url:""});
+	var photo = models.Photos.build({name:"",url:""});
 	res.render('photos/new',{photo: photo});
 };
 
@@ -37,7 +37,7 @@ exports.show = function (req, res,next) {
 
 // Escribe una nueva foto en el registro de imagenes.
 exports.create = function (req, res,next) {
-	var photo = models.Photos.buid({name:req.body.photo.name,
+	var photo = models.Photos.build({name:req.body.photo.name,
 								    url: req.body.url});
 	//var photo = req.files.photo;
 	var id = Math.random().toString(36).substr(2, 10);
