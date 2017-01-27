@@ -25,8 +25,11 @@ var sequelize = new Sequelize(url,
 
 // importar definición de la tabla de photo.js
 var Photos = sequelize.import(path.join(__dirname,'photo'));
+var User = sequelize.import(path.join(__dirname,'user'));
 
 
                        
 
-exports.Photos = Photos; // exportar definición de tabla Quiz
+exports.Photos = Photos; // exportar definición de tabla Photos
+exports.User = User;
+
