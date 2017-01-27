@@ -85,7 +85,7 @@ exports.destroy = function (req, res,next) {
 		req.redirect('/photos');
 	})
 	.catch(function(error){
-		onsole.log("Error deleting the photo");
+		console.log("Error deleting the photo");
 		next(error);
 	})
 	var photoId = req.params.photoId;
