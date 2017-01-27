@@ -1,6 +1,10 @@
 
 
-<a class="photo" href='/photos/1'>
-	<img src="<%=url%>">
-	<p><%=name%></p>
+<%for (var t in photos) {%>
+
+<a class="photo" href='/photos/<%=photos[t].id%>'>
+	<img src="<%=photos[t].url%>">
+	<p><%=photos[t].name%></p>
 </a>
+
+<%}%>

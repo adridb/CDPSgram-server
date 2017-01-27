@@ -3,22 +3,16 @@ var fs = require('fs');
 var models = require('../models');
 // Devuelve una lista de las imagenes disponibles y sus metadatos
 exports.list = function (req, res,next) {
-models.Photos.findOne() // Busca la primera pregunta existente
+models.Photos.findAll() // Busca la primera pregunta existente
 		.then(function(photos) {
 			if (photos) {
-				
+				res.render('photos/index', {photos: photos});
+			}
 
-				res.render('photos/index', {name: photos.name,
-								                url: photos.url});
-		    } else {
-		    	throw new Error('No hay preguntas en la BBDD.');
-		    }
-		})
-		.catch(function(error) {
-			next(error);
-});
+			})
+		.catch(function(error) { next(error); });
 
-
+ }
 	//var photos = photo_model.photos;
 	//res.render('photos/index', {photos: photos});
 };
@@ -30,10 +24,16 @@ exports.new = function (req, res) {
 
 // Devuelve la vista de visualización de una foto.
 // El campo photo.url contiene la url donde se encuentra el fichero de audio
-exports.show = function (req, res) {
-	var photo = photo_model.photos[req.params.photoId];
-	photo.id = req.params.photoId;
-	res.render('photos/show', {photo: photo});
+exports.show = function (req, res,next) {
+	models.Photos.findById(req.params.photoId) // Busca la primera pregunta existente
+		.then(function(photo) {
+			if (photo) {
+				res.render('photos/index', {photo: photo}); 
+			}
+		    
+		})
+		.catch(function(error) { next(error); });
+	}
 };
 
 // Escribe una nueva foto en el registro de imagenes.

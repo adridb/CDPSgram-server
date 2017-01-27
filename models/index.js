@@ -32,9 +32,12 @@ sequelize.sync().then(function() {
         // Ya se han creado las tablas necesarias.
         return Photos.count().then(function (c) {
                     if (c === 0) {   // la tabla se inicializa solo si está vacía
-                        return Photos.create({ name: 'Man',
-          	                                 url: photos_url + '/photos/photo1.jpg'
-          	                               })
+                        return Photos.bulkCreate([{name: 'Wood',url: photos_url + '/photos/photo1.jpg'},
+                                                  {name: 'Man',url: photos_url + '/photos/photo2.jpg'},
+                                                  {name: 'Desktop',url: photos_url + '/photos/photo3.jpg'},
+                                                  {name: 'Woman',url: photos_url + '/photos/photo4.jpg'},
+                                                  {name: 'People',url: photos_url + '/photos/photo5.jpg'}
+                                                  ])
                                    .then(function() {
                                         console.log('Base de datos inicializada con datos');
                                     });

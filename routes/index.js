@@ -14,7 +14,7 @@ router.get('/photos', photoController.list);
 
 router.get('/photos/new', photoController.new);
 
-router.get('/photos/:photoId', photoController.show);
+router.get('/photos/:photoId(\\d+)', photoController.show);
 
 router.post('/photos', multer({inMemory: true}), photoController.create);
 
