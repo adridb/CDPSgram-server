@@ -16,8 +16,9 @@ models.Photos.findAll() // Busca la primera pregunta existente
 };
 
 // Devuelve la vista del formulario para subir una nueva foto
-exports.new = function (req, res) {
-	res.render('photos/new');
+exports.new = function (req, res,next) {
+	var photo = models.Photos.buid({name:"",url:""});
+	res.render('photos/new',{photo: photo});
 };
 
 // Devuelve la vista de visualización de una foto.
@@ -35,20 +36,29 @@ exports.show = function (req, res,next) {
 };
 
 // Escribe una nueva foto en el registro de imagenes.
-exports.create = function (req, res) {
-	var photo = req.files.photo;
-	console.log('Nuevo fichero: ', req.body);
-	var name = req.body.name;
-	var url = req.body.url;
+exports.create = function (req, res,next) {
+	var photo = models.Photos.buid({name:req.body.photo.name,
+								    url: req.body.url});
+	//var photo = req.files.photo;
 	var id = Math.random().toString(36).substr(2, 10);
+	console.log('Nuevo fichero: ', req.body);
+	cosole.log("Id"+ id);
+	//var name = req.body.name;
+	//var url = req.body.url;
 	
+	quiz.save({fields:["id","name","url"]}).then(function(photo){
+		res.redirect('/photos');
+	})
+	.catch(function(error){
+		next(error);
+	})
 	// Escribe los metadatos de la nueva foto en el registro.
-	photo_model.photos[id] = {
-		name: name,
-		url: url
-	};
+	//photo_model.photos[id] = {
+	//	name: name,
+	//	url: url
+	//};
 
-	res.redirect('/photos');
+	
 };
 
 // Borra una foto (photoId) del registro de imagenes 
