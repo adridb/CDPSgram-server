@@ -1,6 +1,21 @@
 var fs = require('fs');
 //var photo_model = require('./../models/photo');
 var models = require('../models');
+
+
+// Autoload de photo asociado a :photoId
+exports.load = function(req, res, next, photoId) {
+    models.Photos.findById(photoId)
+  		.then(function(photo) {
+      		if (photo) {
+        		req.photo = photo;
+        		next();
+      		} else { 
+      			throw new Error('No existe photoId=' + photoId);
+      		}
+        })
+        .catch(function(error) { next(error); });
+};
 // Devuelve una lista de las imagenes disponibles y sus metadatos
 exports.list = function (req, res,next) {
 models.Photos.findAll() // Busca la primera pregunta existente
@@ -27,7 +42,7 @@ exports.show = function (req, res,next) {
 	models.Photos.findById(req.params.photoId) // Busca la primera pregunta existente
 		.then(function(photo) {
 			if (photo) {
-				res.render('photos/show', {photo: photo}); 
+				res.render('photos/show', {photo: req.photo}); 
 			}
 		    
 		})
@@ -61,13 +76,22 @@ exports.create = function (req, res,next) {
 	
 };
 
-// Borra una foto (photoId) del registro de imagenes 
-exports.destroy = function (req, res) {
+// Borra una foto (photoId) de la bbdd 
+exports.destroy = function (req, res,next) {
+	// Borra la entrada de la bbdd
+	req.photo.destroy()
+	.then(function(){
+		console.log("The photo has been deleted");
+		req.redirect('/photos');
+	})
+	.catch(function(error){
+		onsole.log("Error deleting the photo");
+		next(error);
+	})
 	var photoId = req.params.photoId;
 
 	// Aquí debe implementarse el borrado del fichero de audio indetificado por photoId en photos.cdpsfy.es
 
-	// Borra la entrada del registro de datos
-	delete photo_model.photos[photoId];
-	res.redirect('/photos');
+	
+	
 };
