@@ -46,7 +46,7 @@ exports.create = function (req, res,next) {
 	//var name = req.body.name;
 	//var url = req.body.url;
 	
-	quiz.save({fields:["id","name","url"]}).then(function(photo){
+	photo.save({fields:["id","name","url"]}).then(function(photo){
 		res.redirect('/photos');
 	})
 	.catch(function(error){
