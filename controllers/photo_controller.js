@@ -18,7 +18,7 @@ exports.load = function(req, res, next, photoId) {
 };
 // Devuelve una lista de las imagenes disponibles y sus metadatos
 exports.list = function (req, res,next) {
-models.Photos.findAll() // Busca la primera pregunta existente
+models.Photos.findAll() 
 		.then(function(photos) {
 			if (photos) {
 				res.render('photos/index', {photos: photos});
